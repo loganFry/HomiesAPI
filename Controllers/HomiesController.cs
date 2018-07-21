@@ -21,9 +21,9 @@ namespace HomiesAPI.Controllers
 
         // GET api/values
         [HttpGet]
-        public ActionResult<string[]> Get()
+        public ActionResult<IEnumerable<Homies>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Homies;
         }
 
         // GET api/values/5
