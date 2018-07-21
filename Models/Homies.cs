@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HomiesAPI
+namespace HomiesAPI.Models
 {
     public partial class Homies
     {
