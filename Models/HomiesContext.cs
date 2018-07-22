@@ -17,5 +17,7 @@ namespace HomiesAPI.Models
 
         public DbSet<Homie> Homies { get; set; }
 
+        public DbSet<CheckIn> CheckIns { get; set; }
+
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace HomiesAPI.Models 
 {
     public class Homie 
@@ -13,5 +15,7 @@ namespace HomiesAPI.Models
         public bool IsHome { get; set; }
 
         public bool HasGuest { get; set; }
+
+        public  ICollection<CheckIn> CheckIns { get; set; }
     }
 }
