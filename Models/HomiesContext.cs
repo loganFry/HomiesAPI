@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using HomiesAPI.Models;
 
-namespace HomiesAPI.DataAccess
+namespace HomiesAPI.Models
 {
     public partial class HomiesContext : DbContext
     {
@@ -22,8 +21,6 @@ namespace HomiesAPI.DataAccess
         {
             modelBuilder.Entity<Homies>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(100);
