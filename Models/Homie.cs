@@ -16,6 +16,8 @@ namespace HomiesAPI.Models
 
         public bool HasGuest { get; set; }
 
-        public  ICollection<CheckIn> CheckIns { get; set; }
+        public ICollection<CheckIn> CheckIns { get; set; }
+
+        public ICollection<CheckOut> CheckOuts { get; set; }
     }
 }

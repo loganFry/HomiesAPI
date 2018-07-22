@@ -19,5 +19,6 @@ namespace HomiesAPI.Models
 
         public DbSet<CheckIn> CheckIns { get; set; }
 
+        public DbSet<CheckOut> CheckOuts { get; set; }
     }
 }
