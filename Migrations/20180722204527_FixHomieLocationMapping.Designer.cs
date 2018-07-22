@@ -3,15 +3,17 @@ using System;
 using HomiesAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HomiesAPI.Migrations
 {
     [DbContext(typeof(HomiesContext))]
-    partial class HomiesContextModelSnapshot : ModelSnapshot
+    [Migration("20180722204527_FixHomieLocationMapping")]
+    partial class FixHomieLocationMapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

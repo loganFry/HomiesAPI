@@ -25,6 +25,6 @@ namespace HomiesAPI.Models
 
         public string DisplayName { get; set; }
 
-        public ICollection<LocationHomie> LocationHomies { get; set; }
+        public ICollection<Homie> Homies { get; set; }
     }
 }

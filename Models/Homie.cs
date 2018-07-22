@@ -26,6 +26,6 @@ namespace HomiesAPI.Models
 
         public ICollection<CheckOut> CheckOuts { get; set; }
 
-        public ICollection<LocationHomie> LocationHomies { get; set; }
+        public Location Location { get; set; }
     }
 }
