@@ -2,11 +2,12 @@ using HomiesAPI.Models;
 using System;
 using System.Linq;
 
-namespace HomiesAPI.DataAccess 
+namespace HomiesAPI.DataAccess
 {
-    public class DbSeeder 
+    public class DbSeeder
     {
         private HomiesContext _context;
+
 
         public DbSeeder(HomiesContext context)
         {
@@ -15,25 +16,44 @@ namespace HomiesAPI.DataAccess
 
         public void Seed()
         {
-            if(_context.Homies.Any())
+            if (_context.Homies.Any())
             {
                 return;
             }
 
-            _context.AddRange(CreateHomies());
+            _context.AddRange(CreateHomies(10));
             _context.SaveChanges();
         }
 
-        public Homie[] CreateHomies()
+        public Homie[] CreateHomies(int count)
         {
-            Homie[] homies = new Homie[]
+            Homie[] tempHomies = new Homie[count];
+            for(int i = 0; i < count; i++)
             {
-                new Homie { FirstName = "Logan", LastName = "Fry", Email = "loganfrybball@yahoo.com" },
-                new Homie { FirstName = "Jack", LastName = "Rodman", Email = "rodman.123@osu.edu" },
-                new Homie { FirstName = "Kurt", LastName = "Atwell", Email = "atwell.234@osu.edu" }
+                tempHomies[i] = CreateRandomHomie();
+            }
+
+            return tempHomies;
+        }
+
+        public Homie CreateRandomHomie()
+        {
+            var isHome = SeedDefaults.GetRandomBool();
+            var firstName = SeedDefaults.FirstNames[SeedDefaults.GetRandomInt()];
+            
+            Homie temp = new Homie 
+            {
+                FirstName = firstName,
+                LastName = SeedDefaults.LastNames[SeedDefaults.GetRandomInt()],
+                Email = SeedDefaults.Emails[SeedDefaults.GetRandomInt()],
+                IsHome = isHome,
+                // HasGuest can only be true if the Homie is home, otherwise
+                // it will always be false
+                HasGuest = isHome ? SeedDefaults.GetRandomBool() : false,
+                NickName = firstName.ToLower() + SeedDefaults.GetRandomInt(100) 
             };
 
-            return homies;
+            return temp;
         }
     }
 }
