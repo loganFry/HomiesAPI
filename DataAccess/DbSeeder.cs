@@ -24,13 +24,13 @@ namespace HomiesAPI.DataAccess
             _context.SaveChanges();
         }
 
-        public Homies[] CreateHomies()
+        public Homie[] CreateHomies()
         {
-            Homies[] homies = new Homies[]
+            Homie[] homies = new Homie[]
             {
-                new Homies { FirstName = "Logan", LastName = "Fry", Nickname = "frenchfry", Email = "loganfrybball@yahoo.com" },
-                new Homies { FirstName = "Jack", LastName = "Rodman", Nickname = "rod", Email = "rodman.123@osu.edu" },
-                new Homies { FirstName = "Kurt", LastName = "Atwell", Nickname = "katwell", Email = "atwell.234@osu.edu" }
+                new Homie { FirstName = "Logan", LastName = "Fry", Email = "loganfrybball@yahoo.com" },
+                new Homie { FirstName = "Jack", LastName = "Rodman", Email = "rodman.123@osu.edu" },
+                new Homie { FirstName = "Kurt", LastName = "Atwell", Email = "atwell.234@osu.edu" }
             };
 
             return homies;

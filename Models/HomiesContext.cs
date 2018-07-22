@@ -15,28 +15,7 @@ namespace HomiesAPI.Models
         {
         }
 
-        public virtual DbSet<Homies> Homies { get; set; }
+        public DbSet<Homie> Homies { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Homies>(entity =>
-            {
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Nickname)
-                    .IsRequired()
-                    .HasMaxLength(100);
-            });
-        }
     }
 }

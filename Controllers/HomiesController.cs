@@ -20,7 +20,7 @@ namespace HomiesAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Homies>> Get()
+        public ActionResult<IEnumerable<Homie>> Get()
         {
             return _context.Homies;
         }
