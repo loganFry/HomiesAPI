@@ -32,7 +32,7 @@ namespace HomiesAPI.DataAccess
             "Michaels"
         };
 
-        public static string[] Emails { get;set; } = new string[]
+        public static string[] Emails { get; set; } = new string[]
         {
             "mruw.ratnaa@nhifswkaidn4hr0dwf4.ga",
             "clucia@keykeykelynss.tk",
@@ -44,14 +44,77 @@ namespace HomiesAPI.DataAccess
             "falim@vmail.tech"
         };
 
-        public static int GetRandomInt(int max = NUM_DEFAULTS)
+        public static string[] States { get; set; } = new string[]
         {
-            return _randomizer.Next(max);
+            "Ohio",
+            "California",
+            "Michigan",
+            "Florida",
+            "Texas",
+            "Washington",
+            "Hawaii",
+            "New York"
+        };
+
+        public static string[] Cities { get; set; } = new string[]
+        {
+            "Columbus",
+            "Los Angeles",
+            "Detroit",
+            "Miami",
+            "San Antonio",
+            "Seattle",
+            "Honolulu",
+            "Manhattan"
+        };
+
+        public static string[] Streets { get; set; } = new string[] 
+        {
+            "Oakland Avenue",
+            "Main Street",
+            "5th Avenue",
+            "Park Place Avenue",
+            "Lane Avenue",
+            "High Street",
+            "College Road",
+            "Morgan Run"
+        };
+
+        public static int GetRandomInt(int min = 0, int max = NUM_DEFAULTS)
+        {
+            return _randomizer.Next(min, max);
         }
 
         public static bool GetRandomBool()
         {
             return _randomizer.Next(100) > 50;
+        }
+
+        public static string GetRandomDigitString(int numDigits = 5)
+        {
+            var min = (int)Math.Pow(10, numDigits - 1);
+            var max = (int)Math.Pow(10, numDigits);
+            var num = GetRandomInt(min, max);
+            var converted = num.ToString();
+            return converted;
+        }
+
+        public static DateTime GetRandomDateTime()
+        {
+            var monthsOffset = SeedDefaults.GetRandomInt(-12, 1);
+            var daysOffset = SeedDefaults.GetRandomInt(-30, 1);
+            var hoursOffset = SeedDefaults.GetRandomInt(-60, 1);
+            var minutesOffset = SeedDefaults.GetRandomInt(-60, 1);
+            var secondsOffset = SeedDefaults.GetRandomInt(-60, 1);
+
+            var time = DateTime.Now
+                .AddMonths(monthsOffset)
+                .AddDays(daysOffset)
+                .AddHours(hoursOffset)
+                .AddMinutes(minutesOffset)
+                .AddSeconds(secondsOffset);
+
+            return time;
         }
     }
 }
