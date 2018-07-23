@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomiesAPI.DataAccess;
 using HomiesAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomiesAPI.Controllers
 {    
@@ -22,7 +23,10 @@ namespace HomiesAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Homie>> Get()
         {
-            return _context.Homies;
+            return _context.Homies
+                .Include(x => x.Location)
+                .Include(x => x.CheckIns)
+                .Include(x => x.CheckOuts).ToList();
         }
 
         
