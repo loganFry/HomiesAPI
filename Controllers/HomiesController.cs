@@ -69,5 +69,50 @@ namespace HomiesAPI.Controllers
             _context.SaveChanges();
             return NoContent();
         }
+
+        [HttpPatch("{id}/checkin")]
+        public IActionResult CheckIn(int id, Homie updatedHomie)
+        {
+            var homie = _context.Homies.Find(new object[] { id });
+            _context.Entry(homie).Collection(x => x.CheckIns).Load();
+
+            if(homie == null)
+            {
+                return NotFound();
+            }
+
+            homie.IsHome = true;
+            homie.HasGuest = updatedHomie.HasGuest;
+            homie.CheckIns.Add(new CheckIn(){
+                WithGuest = homie.HasGuest,
+                Time = DateTime.Now
+            });
+
+            _context.Homies.Update(homie);
+            _context.SaveChanges();
+            return NoContent();
+        } 
+
+        [HttpPatch("{id}/checkout")]
+        public IActionResult CheckOut(int id)
+        {
+            var homie = _context.Homies.Find(new object[] { id });
+            _context.Entry(homie).Collection(x => x.CheckOuts).Load();
+
+            if(homie == null)
+            {
+                return NotFound();
+            }
+
+            homie.IsHome = false;
+            homie.HasGuest = false;
+            homie.CheckOuts.Add(new CheckOut(){
+                Time = DateTime.Now
+            });
+
+            _context.Homies.Update(homie);
+            _context.SaveChanges();
+            return NoContent();
+        } 
     }
 }
