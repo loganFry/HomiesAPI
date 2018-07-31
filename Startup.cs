@@ -30,10 +30,10 @@ namespace HomiesAPI
         {
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(x => 
+                .AddJsonOptions(x =>
                 {
-                    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
-                    x.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+                    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    x.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
                 });
             var connectionString = Configuration.GetConnectionString("Homies");
             services.AddEntityFrameworkNpgsql()
@@ -41,8 +41,10 @@ namespace HomiesAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -52,6 +54,7 @@ namespace HomiesAPI
                 app.UseHsts();
             }
 
+            app.UseStatusCodePages();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
