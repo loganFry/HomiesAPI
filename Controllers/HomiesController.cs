@@ -29,7 +29,7 @@ namespace HomiesAPI.Controllers
                 .Include(x => x.CheckOuts).ToList();
         }
 
-        [HttpGet("{id}", Name="GetById")]
+        [HttpGet("{id}", Name="GetHomieById")]
         public ActionResult<Homie> GetById(int id)
         {
             var homie = _context.Homies.FirstOrDefault(x => x.Id == id);
@@ -44,16 +44,16 @@ namespace HomiesAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Homie homie)
+        public IActionResult Create([FromBody] Homie homie)
         {
             _context.Homies.Add(homie);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetById", new { id = homie.Id }, homie);
+            return CreatedAtRoute("GetHomieById", new { id = homie.Id }, homie);
         }
 
         [HttpPut("{id}")]
-        public IActionResult FullUpdate(int id, Homie updatedHomie)
+        public IActionResult FullUpdate(int id, [FromBody] Homie updatedHomie)
         {
             var homie = _context.Homies.Find(new object[]{ id });
             if(homie == null)
@@ -72,50 +72,5 @@ namespace HomiesAPI.Controllers
             _context.SaveChanges();
             return NoContent();
         }
-
-        // [HttpPatch("{id}/checkin")]
-        // public IActionResult CheckIn(int id, Homie updatedHomie)
-        // {
-        //     var homie = _context.Homies.Find(new object[] { id });
-        //     _context.Entry(homie).Collection(x => x.CheckIns).Load();
-
-        //     if(homie == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     homie.IsHome = true;
-        //     homie.HasGuest = updatedHomie.HasGuest;
-        //     homie.CheckIns.Add(new CheckIn(){
-        //         WithGuest = homie.HasGuest,
-        //         Time = DateTime.Now
-        //     });
-
-        //     _context.Homies.Update(homie);
-        //     _context.SaveChanges();
-        //     return NoContent();
-        // } 
-
-        // [HttpPatch("{id}/checkout")]
-        // public IActionResult CheckOut(int id)
-        // {
-        //     var homie = _context.Homies.Find(new object[] { id });
-        //     _context.Entry(homie).Collection(x => x.CheckOuts).Load();
-
-        //     if(homie == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     homie.IsHome = false;
-        //     homie.HasGuest = false;
-        //     homie.CheckOuts.Add(new CheckOut(){
-        //         Time = DateTime.Now
-        //     });
-
-        //     _context.Homies.Update(homie);
-        //     _context.SaveChanges();
-        //     return NoContent();
-        // } 
     }
 }
