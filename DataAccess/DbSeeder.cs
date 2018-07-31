@@ -28,16 +28,16 @@ namespace HomiesAPI.DataAccess
         {
             bool homiesNewlyCreated = false;
 
-            if (!_context.Homies.Any())
-            {
-                _context.AddRange(CreateRandomHomies(10));
-                homiesNewlyCreated = true;
-            }
-
             if (!_context.Locations.Any())
             {
                 _context.Locations.AddRange(CreateRandomLocations(5));
             }
+
+            if (!_context.Homies.Any())
+            {
+                _context.AddRange(CreateRandomHomies(10));
+                homiesNewlyCreated = true;
+            }            
 
             _context.SaveChanges();
             return homiesNewlyCreated;
