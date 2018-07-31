@@ -8,7 +8,6 @@ namespace HomiesAPI.Models
     {
         public int Id { get;set; }
 
-        [Required(ErrorMessage = "Checkout must have an owner")]
         [JsonIgnore]
         public Homie Homie { get; set; }
 
