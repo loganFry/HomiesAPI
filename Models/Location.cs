@@ -1,13 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using HomiesAPI.DataAccess.Repositories;
 
 namespace HomiesAPI.Models 
 {
-    public class Location 
+    public class Location : EntityBase
     {
-        public int Id { get;set; }
-
         [Required(ErrorMessage = "Location must have a street name")]
         public string Street { get; set; }
 

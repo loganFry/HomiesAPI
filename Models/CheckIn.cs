@@ -1,13 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using HomiesAPI.DataAccess.Repositories;
 
 namespace HomiesAPI.Models 
 {
-    public class CheckIn 
+    public class CheckIn : EntityBase
     {
-        public int Id { get;set; }
-
         [JsonIgnore]
         public Homie Homie { get; set; }
         
