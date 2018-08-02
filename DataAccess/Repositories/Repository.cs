@@ -9,7 +9,7 @@ namespace HomiesAPI.DataAccess.Repositories
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
-        private readonly HomiesContext _dbContext;
+        protected readonly HomiesContext _dbContext;
 
         public Repository(HomiesContext dbContext)
         {
