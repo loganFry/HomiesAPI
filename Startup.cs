@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using HomiesAPI.DataAccess;
 using HomiesAPI.Models;
+using HomiesAPI.DataAccess.Repositories;
 
 namespace HomiesAPI
 {
@@ -38,6 +39,8 @@ namespace HomiesAPI
             var connectionString = Configuration.GetConnectionString("Homies");
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<HomiesContext>(options => options.UseNpgsql(connectionString));
+
+            services.AddScoped<IHomieRepository, HomieRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
