@@ -41,6 +41,7 @@ namespace HomiesAPI
                 .AddDbContext<HomiesContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<IHomieRepository, HomieRepository>();
+            services.AddScoped<IRepository<CheckIn>, CheckInRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
