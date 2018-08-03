@@ -123,5 +123,19 @@ namespace HomiesAPI.Controllers
             
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var homie = _homieRepo.GetById(id);
+            if(homie == null)
+            {
+                return NotFound();
+            }
+
+            _homieRepo.Delete(homie);
+            
+            return NoContent();
+        }
     }
 }

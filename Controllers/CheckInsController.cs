@@ -42,6 +42,20 @@ namespace HomiesAPI.Controllers
             return checkIn;
         }
 
+        [HttpDelete("checkins/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var checkIn = _checkInRepo.GetById(id);
+            if(checkIn == null)
+            {
+                return NotFound();
+            }
+
+            _checkInRepo.Delete(checkIn);
+
+            return NoContent();
+        }
+
         [HttpGet("homies/{homieId}/checkins")]
         public ActionResult<IEnumerable<CheckIn>> GetAllForHomie(int homieId)
         {

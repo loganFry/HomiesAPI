@@ -42,6 +42,20 @@ namespace HomiesAPI.Controllers
             return checkOut;
         }
 
+        [HttpDelete("checkouts/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var checkOut = _checkOutRepo.GetById(id);
+            if(checkOut == null)
+            {
+                return NotFound();
+            }
+
+            _checkOutRepo.Delete(checkOut);
+
+            return NoContent();
+        }
+
         [HttpGet("homies/{homieId}/checkouts")]
         public ActionResult<IEnumerable<CheckOut>> GetAllForHomie(int homieId)
         {
