@@ -90,14 +90,7 @@ namespace HomiesAPI.Controllers
                 return NotFound();
             }
 
-            homie.IsHome = true;
-            homie.HasGuest = withGuest;
-            homie.CheckIns.Add(new CheckIn
-            {
-                WithGuest = withGuest,
-                Time = DateTime.Now
-            });
-            _homieRepo.Edit(homie);
+            _homieRepo.CheckIn(homie, withGuest, DateTime.Now);
 
             return NoContent();
         }
@@ -114,12 +107,7 @@ namespace HomiesAPI.Controllers
                 return NotFound();
             }
 
-            homie.IsHome = false;
-            homie.HasGuest = false;
-            homie.CheckOuts.Add(new CheckOut{
-                Time = DateTime.Now
-            });
-            _homieRepo.Edit(homie);
+            _homieRepo.CheckOut(homie, DateTime.Now);
             
             return NoContent();
         }
@@ -134,7 +122,7 @@ namespace HomiesAPI.Controllers
             }
 
             _homieRepo.Delete(homie);
-            
+
             return NoContent();
         }
     }
