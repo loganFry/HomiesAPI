@@ -70,7 +70,7 @@ namespace HomiesAPI.Controllers
             }
 
             var checkIn = homie.CheckIns.FirstOrDefault(x => x.Id == id);
-            if(checkIn == default(CheckIn))
+            if(checkIn == null)
             {
                 return NotFound();
             }
