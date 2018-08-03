@@ -12,11 +12,11 @@ namespace HomiesAPI.Controllers
     [Route("api")]
     public class CheckInsController : ControllerBase
     {
-        private IRepository<CheckIn> _checkInRepo;
+        private ICheckInRepository _checkInRepo;
 
         private IHomieRepository _homieRepo;
 
-        public CheckInsController(IRepository<CheckIn> checkInRepo, IHomieRepository homieRepo)
+        public CheckInsController(ICheckInRepository checkInRepo, IHomieRepository homieRepo)
         {
             _checkInRepo = checkInRepo;
             _homieRepo = homieRepo;

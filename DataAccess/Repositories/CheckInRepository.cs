@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace HomiesAPI.DataAccess.Repositories
 {
-    public class CheckInRepository : Repository<CheckIn>
+    public class CheckInRepository : Repository<CheckIn>, ICheckInRepository
     {
         public CheckInRepository(HomiesContext context) : base(context)
         {
