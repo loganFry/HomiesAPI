@@ -32,34 +32,39 @@ namespace HomiesAPI.DataAccess.Repositories
             {
                 foreach (var include in includes)
                 {
-                    query.Include(include);
+                    query = query.Include(include);
                 }
             }
 
             return query.FirstOrDefault(predicate);
         }
 
-        public virtual IEnumerable<T> List(Expression<Func<T, object>>[] includes = null)
+        public virtual List<T> List(Expression<Func<T, object>>[] includes = null)
         {
-            var elements = _dbContext.Set<T>();
+            IQueryable<T> query = _dbSet;
             if (includes != null)
             {
-                return includes.Aggregate(elements, (current, include) => (DbSet<T>)current.Include(include));
+                foreach(var include in includes)
+                {
+                    query = query.Include(include);
+                }
             }
 
-            return elements;
+            return query.ToList();
         }
 
-        public virtual IEnumerable<T> List(Expression<Func<T, bool>> predicate, Expression<Func<T, object>>[] includes = null)
+        public virtual List<T> List(Expression<Func<T, bool>> predicate, Expression<Func<T, object>>[] includes = null)
         {
-            var elements = _dbContext.Set<T>().Where(predicate);
+            IQueryable<T> query = _dbSet;
             if (includes != null)
             {
-                return includes
-                    .Aggregate(elements, (current, include) => (DbSet<T>)current.Include(include))
-                    .Where(predicate);
+                foreach(var include in includes)
+                {
+                    query = query.Include(include);
+                }
             }
-            return elements;
+            
+            return query.Where(predicate).ToList();
         }
 
         public void Add(T entity)

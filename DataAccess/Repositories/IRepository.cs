@@ -8,8 +8,8 @@ namespace HomiesAPI.DataAccess.Repositories
     {
         T GetById(int id, Expression<Func<T, object>>[] includes = null);
         T Get(Expression<Func<T, bool>> predicate, Expression<Func<T, object>>[] includes = null);
-        IEnumerable<T> List(Expression<Func<T, object>>[] includes = null);
-        IEnumerable<T> List(Expression<Func<T, bool>> predicate, Expression<Func<T, object>>[] includes = null);
+        List<T> List(Expression<Func<T, object>>[] includes = null);
+        List<T> List(Expression<Func<T, bool>> predicate, Expression<Func<T, object>>[] includes = null);
         void Add(T entity);
         void Delete(T entity);
         void Edit(T entity);
