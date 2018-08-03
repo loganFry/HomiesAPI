@@ -3,33 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using HomiesAPI.DataAccess;
 using HomiesAPI.Models;
-using Microsoft.EntityFrameworkCore;
+using HomiesAPI.DataAccess.Repositories;
+using System.Linq.Expressions;
 
 namespace HomiesAPI.Controllers
 {
     [Route("api")]
     public class CheckInsController : ControllerBase
     {
-        private HomiesContext _context;
+        private IRepository<CheckIn> _checkInRepo;
 
-        public CheckInsController(HomiesContext context)
+        private IHomieRepository _homieRepo;
+
+        public CheckInsController(IRepository<CheckIn> checkInRepo, IHomieRepository homieRepo)
         {
-            _context = context;
+            _checkInRepo = checkInRepo;
+            _homieRepo = homieRepo;
         }
 
         [HttpGet("checkins")]
         public ActionResult<IEnumerable<CheckIn>> GetAll()
         {
-            return _context.CheckIns.ToList();
+            var checkins = _checkInRepo.List().ToList(); 
+
+            return checkins;
         }
 
         [HttpGet("checkins/{id}", Name="GetCheckInById")]
         public ActionResult<CheckIn> GetById(int id)
         {
-            var checkIn = _context.CheckIns.FirstOrDefault(x => x.Id == id);
-            if(checkIn == default(CheckIn))
+            var checkIn = _checkInRepo.GetById(id);
+            if(checkIn == null)
             {
                 return NotFound();
             }
@@ -37,24 +42,17 @@ namespace HomiesAPI.Controllers
             return checkIn;
         }
 
-        [HttpPost("checkins")]
-        public IActionResult Create([FromBody] CheckIn checkIn)
-        {
-            _context.CheckIns.Add(checkIn);
-            _context.SaveChanges();
-
-            return CreatedAtRoute("GetCheckInById", new { id = checkIn.Id }, checkIn);
-        }
-
         [HttpGet("homies/{homieId}/checkins")]
         public ActionResult<IEnumerable<CheckIn>> GetAllForHomie(int homieId)
         {
-            var homie = _context.Homies.FirstOrDefault(x => x.Id == homieId);
-            if(homie == default(Homie))
+            var includes = new Expression<Func<Homie, object>>[] {
+                x => x.CheckIns
+            };
+            var homie = _homieRepo.GetById(homieId, includes);
+            if(homie == null)
             {
                 return NotFound();
             }
-            _context.Entry(homie).Collection(x => x.CheckIns).Load();
 
             return homie.CheckIns.ToList();
         }
@@ -62,12 +60,14 @@ namespace HomiesAPI.Controllers
         [HttpGet("homies/{homieId}/checkins/{id}", Name="GetHomieCheckInById")]
         public ActionResult<CheckIn> GetByIdForHomie(int homieId, int id)
         {
-            var homie = _context.Homies.FirstOrDefault(x => x.Id == homieId);
-            if(homie == default(Homie))
+            var includes = new Expression<Func<Homie, object>>[] {
+                x => x.CheckIns
+            };
+            var homie = _homieRepo.GetById(homieId, includes);
+            if(homie == null)
             {
                 return NotFound();
             }
-            _context.Entry(homie).Collection(x => x.CheckIns).Load();
 
             var checkIn = homie.CheckIns.FirstOrDefault(x => x.Id == id);
             if(checkIn == default(CheckIn))
