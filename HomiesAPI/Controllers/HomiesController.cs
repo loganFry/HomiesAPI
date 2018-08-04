@@ -21,13 +21,14 @@ namespace HomiesAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Homie>> GetAll()
+        public ActionResult<List<Homie>> GetAll()
         {
             var includes = new Expression<Func<Homie, object>>[] {
                 x => x.Location
             };
+            var homies = _homieRepo.List(includes);
 
-            return _homieRepo.List(includes).ToList();
+            return homies;
         }
 
         [HttpGet("{id}", Name = "GetHomieById")]

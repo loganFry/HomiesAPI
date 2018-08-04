@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomiesAPI", "HomiesAPI\HomiesAPI.csproj", "{583DA83E-C866-46EC-A359-74C2C030E269}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomiesAPI.Tests", "HomiesAPI.Tests\HomiesAPI.Tests.csproj", "{AFF0975D-5EF2-4222-813C-96BFB4B87213}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{583DA83E-C866-46EC-A359-74C2C030E269}.Release|x64.Build.0 = Release|Any CPU
 		{583DA83E-C866-46EC-A359-74C2C030E269}.Release|x86.ActiveCfg = Release|Any CPU
 		{583DA83E-C866-46EC-A359-74C2C030E269}.Release|x86.Build.0 = Release|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Debug|x64.Build.0 = Debug|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Debug|x86.Build.0 = Debug|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Release|x64.ActiveCfg = Release|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Release|x64.Build.0 = Release|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Release|x86.ActiveCfg = Release|Any CPU
+		{AFF0975D-5EF2-4222-813C-96BFB4B87213}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
