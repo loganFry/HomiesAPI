@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 namespace HomiesAPI.Controllers
 {
     [Route("api")]
+    [ApiController]
     public class CheckInsController : ControllerBase
     {
         private ICheckInRepository _checkInRepo;
