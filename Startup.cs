@@ -43,6 +43,7 @@ namespace HomiesAPI
             services.AddScoped<IHomieRepository, HomieRepository>();
             services.AddScoped<ICheckInRepository, CheckInRepository>();
             services.AddScoped<ICheckOutRepository, CheckOutRepository>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
