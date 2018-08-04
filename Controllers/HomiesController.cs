@@ -59,22 +59,9 @@ namespace HomiesAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult FullUpdate(int id, [FromBody] Homie updatedHomie)
+        public IActionResult FullUpdate([FromBody] Homie updatedHomie)
         {
-            var homie = _homieRepo.GetById(id);
-            if (homie == null)
-            {
-                return NotFound();
-            }
-
-            homie.FirstName = updatedHomie.FirstName;
-            homie.LastName = updatedHomie.LastName;
-            homie.NickName = updatedHomie.NickName;
-            homie.Email = updatedHomie.Email;
-            homie.IsHome = updatedHomie.IsHome;
-            homie.HasGuest = updatedHomie.HasGuest;
-
-            _homieRepo.Edit(homie);
+            _homieRepo.Edit(updatedHomie);
             return NoContent();
         }
 
