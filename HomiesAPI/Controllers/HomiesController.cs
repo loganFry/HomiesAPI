@@ -24,8 +24,6 @@ namespace HomiesAPI.Controllers
         public ActionResult<IEnumerable<Homie>> GetAll()
         {
             var includes = new Expression<Func<Homie, object>>[] {
-                x => x.CheckIns,
-                x => x.CheckOuts,
                 x => x.Location
             };
 
@@ -36,8 +34,6 @@ namespace HomiesAPI.Controllers
         public ActionResult<Homie> GetById(int id)
         {
             var includes = new Expression<Func<Homie, object>>[] {
-                x => x.CheckIns,
-                x => x.CheckOuts,
                 x => x.Location
             };
 
