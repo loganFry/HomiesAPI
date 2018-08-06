@@ -17,6 +17,6 @@ namespace HomiesAPI.DataAccess.Repositories
 
     public abstract class EntityBase
     {
-        public int Id { get; protected set; }
+        public int Id { get; set; }
     }
 }

@@ -50,6 +50,11 @@ namespace HomiesAPI.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Homie homie)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _homieRepo.Add(homie);
 
             return CreatedAtRoute("GetHomieById", new { id = homie.Id }, homie);
