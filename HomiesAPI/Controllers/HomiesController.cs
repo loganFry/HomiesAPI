@@ -63,7 +63,13 @@ namespace HomiesAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult FullUpdate([FromBody] Homie updatedHomie)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _homieRepo.Edit(updatedHomie);
+            
             return NoContent();
         }
 
