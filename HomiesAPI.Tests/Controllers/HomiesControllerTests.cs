@@ -85,6 +85,62 @@ namespace HomiesAPI.Tests
             Assert.IsInstanceOfType(result.Result, typeof(NotFoundResult));
         }
 
+        [TestMethod]
+        public void TestCreateValidHomie()
+        {
+            var initialHomies = GetHomies();
+            var initialCount = initialHomies.Count;
+            var newHomie = new Homie 
+            {
+                Id = 3,
+                FirstName = "Jon",
+                LastName = "Snow",
+                Email = "snowman@gmail.com",
+                IsHome = true,
+                HasGuest = false
+            };
+            _mockHomieRepo
+                .Setup(x => x.Add(It.IsAny<Homie>()))
+                .Callback<Homie>(x => initialHomies.Add(x));
+
+            var result = _controller.Create(newHomie);
+
+            Assert.IsNotNull(result);
+
+            // the homie passed in should be added to the collection
+            Assert.AreEqual(initialCount + 1, initialHomies.Count);
+
+            // the result should be a CreatedAtRouteResult
+            Assert.IsInstanceOfType(result, typeof(CreatedAtRouteResult));
+        }
+
+        [TestMethod]
+        public void TestCreateInvalidHomie()
+        {
+            var initialHomies = GetHomies();
+            var initialCount = initialHomies.Count;
+            var newHomie = new Homie 
+            {
+                Id = 3,
+                FirstName = "Jon",
+                LastName = "Snow",
+            };
+           _mockHomieRepo
+                .Setup(x => x.Add(It.IsAny<Homie>()))
+                .Callback<Homie>(x => initialHomies.Add(x));
+
+            _controller.ModelState.AddModelError("Email", "Required");
+            var result = _controller.Create(newHomie);
+
+            Assert.IsNotNull(result);
+
+            // invalid homies should not be added
+            Assert.AreEqual(initialCount, initialHomies.Count);
+
+            // the result should be of the BadRequestObjectResult type
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+
         private List<Homie> GetHomies()
         {
             var homies = new List<Homie> 
